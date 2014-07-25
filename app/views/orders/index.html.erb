@@ -2,17 +2,15 @@
 
 <table class="table">
   <tr>
-    <th> 상품 </th>
-    <th> 주문자 </th>
-    <th> 주소 </th>
+    <th> 날짜 </th>
+    <th> 가격 </th>
     <th> 상태 </th>
   </tr>
 
   <% @orders.each do |order| %>
     <tr>
-      <td> <%= order.item.title %> </td>
-      <td> <%= order.buyer_name %> </td>
-      <td> <%= order.location %> </td>
+      <td> <%= order.created_at %> </td>
+      <td> <%= order.price %> </td>
       <td> <%= order.status %> </td>
     </tr>
   <% end %>

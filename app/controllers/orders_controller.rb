@@ -1,20 +1,22 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @orders = Order.all
+    @orders = current_user.orders
   end
 
   def create
-    @item = Item.find(params[:item_id])
-    @order = @item.orders.create(order_params)
+    @order = current_user.orders.create
+
+    current_user.cart.item_lines.each do |item_line|
+      item_line.cart = nil
+      item_line.order = @order
+      item_line.save
+    end
+
     redirect_to thanks_orders_path
   end
 
   def thanks
   end
-
-  private
-
-    def order_params
-      params.require(:order).permit(:buyer_name, :location)
-    end
 end

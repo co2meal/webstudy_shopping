@@ -1,0 +1,35 @@
+<table class="table">
+  <tr>
+    <th>
+      상품
+    </th>
+    <th>
+      갯수
+    </th>
+    <th>
+      가격
+    </th>
+  </tr>
+
+  <% current_user.cart.item_lines.each do |item_line| %>
+    <tr>
+      <td> <%= item_line.item.title %> </td>    
+      <td> <%= item_line.quantity %> </td>    
+      <td> <%= item_line.item.price * item_line.quantity %> </td>    
+    </tr>
+  <% end %>
+
+</table>
+
+<div class="well">
+  <h1> 총합 </h1>
+  <p>
+    <%= @total %>
+  </p>
+
+  <div class="text-right">
+    <a class="btn btn-success" href="<%= orders_path %>" data-method="post">주문하기</a>  
+  </div>
+
+</div>
+
